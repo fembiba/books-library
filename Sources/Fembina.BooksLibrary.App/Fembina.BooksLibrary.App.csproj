@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Essy.DependencyManagement.Injection" Version="1.4.1" />
+        <PackageReference Include="Essy.DependencyManagement.Injection.Generator" Version="1.4.1" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <PackageReference Include="Essy.DependencyManagement.Modularity" Version="1.4.1" />
+        <PackageReference Include="Essy.DependencyManagement.Modularity.Generator" Version="1.4.1" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+        <PackageReference Include="FluentValidation" Version="11.2.2" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.9" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+        <PackageReference Include="Prism.Container.Extensions" Version="8.0.62" />
+        <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Update="Pages\EditBookPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Pages\EditBookPage.xaml.cs">
+            <SubType>Code</SubType>
+            <DependentUpon>EditBookPage.xaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+</Project>
