@@ -39,8 +39,13 @@
                                        Title="{Binding Path=Model.Title}"
                                        Description="{Binding Path=Model.Description}"
                                        Isbn="{Binding Path=Model.IsbnCode}"
-                                       Author="{Binding Path=Model.AuthorFirstName}"
                                        Year="{Binding Path=Model.PublishYear}">
+                        <controls:BookCard.Author>  
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Model.AuthorFirstName" />
+                                <Binding Path="Model.AuthorLastName" />
+                            </MultiBinding>
+                        </controls:BookCard.Author>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="DeleteClick">
                                 <prism:InvokeCommandAction Command="{Binding Path=Delete}" />
