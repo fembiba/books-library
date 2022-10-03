@@ -10,27 +10,21 @@ using Prism.Commands;
 
 namespace Fembina.BooksLibrary.App.Controllers;
 
-public abstract class BookFormController : Controller
+public abstract class BookFormController : SingleController<BookModel>
 {
     private string? _path;
 
-    public BookFormController(INavigator navigator, IBookService bookService)
+    public BookFormController(INavigator navigator) : base(navigator)
     {
-        BookService = bookService;
-        Navigator = navigator;
         Cancel = new DelegateCommand(OnBack);
         Save = new DelegateCommand(async () => await OnSave().ConfigureAwait(false));
         Upload = new DelegateCommand<SourceUpdatedArgs>(OnUpload);
-        Form = new BookModel();
+        Model = new BookModel();
     }
-    
-    protected IBookService BookService { get; }
-
-    protected INavigator Navigator { get; }
     
     protected string? Path => _path;
 
-    public BookModel Form { get; set; }
+    public BookModel Book => Model!;
 
     public ICommand Upload { get; }
 

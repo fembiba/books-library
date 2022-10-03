@@ -34,16 +34,16 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:BookCard Width="350" Height="225" Margin="7.5"
-                                       Source="{Binding Path=Model.Cover}"
-                                       Identifier="{Binding Path=Model.Identifier}"
-                                       Title="{Binding Path=Model.Title}"
-                                       Description="{Binding Path=Model.Description}"
-                                       Isbn="{Binding Path=Model.IsbnCode}"
-                                       Year="{Binding Path=Model.PublishYear}">
+                                       Source="{Binding Path=Book.Cover}"
+                                       Identifier="{Binding Path=Book.Identifier}"
+                                       Title="{Binding Path=Book.Title}"
+                                       Description="{Binding Path=Book.Description}"
+                                       Isbn="{Binding Path=Book.IsbnCode}"
+                                       Year="{Binding Path=Book.PublishYear}">
                         <controls:BookCard.Author>  
                             <MultiBinding StringFormat="{}{0} {1}">
-                                <Binding Path="Model.AuthorFirstName" />
-                                <Binding Path="Model.AuthorLastName" />
+                                <Binding Path="Book.AuthorFirstName" />
+                                <Binding Path="Book.AuthorLastName" />
                             </MultiBinding>
                         </controls:BookCard.Author>
                         <i:Interaction.Triggers>

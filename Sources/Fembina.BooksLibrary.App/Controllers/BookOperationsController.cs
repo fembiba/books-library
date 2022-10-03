@@ -7,22 +7,19 @@ using Prism.Commands;
 
 namespace Fembina.BooksLibrary.App.Controllers;
 
-public sealed class BookOperationsController : Controller
+public sealed class BookOperationsController : SingleController<BookModel>
 {
     private readonly IBookService _bookService;
 
-    private readonly INavigator _navigator;
-
-    public BookOperationsController(BookModel model, INavigator navigator, IBookService bookService)
+    public BookOperationsController(INavigator navigator, IBookService bookService, BookModel model) : base(navigator)
     {
         Model = model;
-        _navigator = navigator;
         _bookService = bookService;
         Delete = new DelegateCommand(async () => await OnDelete().ConfigureAwait(false));
         Edit = new DelegateCommand(OnEdit);
     }
 
-    public BookModel Model { get; }
+    public BookModel Book => Model!;
 
     public ICommand Edit { get; }
 
@@ -30,9 +27,9 @@ public sealed class BookOperationsController : Controller
 
     private void OnEdit()
     {
-        _navigator.NavigatePage<EditBookPage>(page =>
+        Navigator.NavigatePage<EditBookPage>(page =>
         {
-            var controller = new BookEditFormController(Model, _navigator, _bookService);
+            var controller = new EditBookFormController(Navigator, _bookService, Model!);
             
             page.SetController(controller);
         });
@@ -40,7 +37,7 @@ public sealed class BookOperationsController : Controller
 
     private async Task OnDelete()
     {
-        await _bookService.RemoveBook((int)Model.Identifier!);
-        _navigator.ForceNavigatePage<BooksLibraryPage>();
+        await _bookService.RemoveBook((int)Model!.Identifier!);
+        Navigator.ForceNavigatePage<BooksLibraryPage>();
     }
 }

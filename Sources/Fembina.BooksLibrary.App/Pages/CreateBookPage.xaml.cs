@@ -5,7 +5,7 @@ namespace Fembina.BooksLibrary.App.Pages;
 
 public partial class CreateBookPage : Page
 {
-    public CreateBookPage(BookCreateFormController controller)
+    public CreateBookPage(CreateBookFormController controller)
     {
         InitializeComponent();
 

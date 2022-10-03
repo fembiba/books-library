@@ -14,7 +14,7 @@ public sealed class ControllersModule : Module
             .As<Controller>()
             .ToTransient();
         
-        container.SetTarget<BookEditFormController>()
+        container.SetTarget<EditBookFormController>()
             .AsSelf()
             .As<Controller>()
             .ToTransient();
@@ -24,7 +24,7 @@ public sealed class ControllersModule : Module
             .As<Controller>()
             .ToTransient();
 
-        container.SetTarget<BookCreateFormController>()
+        container.SetTarget<CreateBookFormController>()
             .AsSelf()
             .As<Controller>()
             .ToTransient();

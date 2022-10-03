@@ -10,27 +10,20 @@ using Prism.Commands;
 
 namespace Fembina.BooksLibrary.App.Controllers;
 
-public sealed class ListedBooksController : Controller
+public sealed class ListedBooksController : ManyController<BookOperationsController>
 {
-    private readonly ObservableCollection<BookOperationsController> _books;
-
     private readonly IBookService _bookService;
 
-    private readonly INavigator _navigator;
-
-    public ListedBooksController(INavigator navigator, IBookService bookService)
+    public ListedBooksController(INavigator navigator, IBookService bookService) : base(navigator)
     {
-        _books = new ObservableCollection<BookOperationsController>();
-        _navigator = navigator;
         _bookService = bookService;
-        Books = _books;
         Pattern = string.Empty;
         Search = new DelegateCommand(async () => await OnSearching().ConfigureAwait(false));
         Create = new DelegateCommand(OnCreate);
         OnSearching().Wait();
     }
 
-    public IReadOnlyCollection<BookOperationsController> Books { get; }
+    public IReadOnlyCollection<BookOperationsController> Books => Models;
 
     public string Pattern { get; set; }
 
@@ -41,7 +34,7 @@ public sealed class ListedBooksController : Controller
     // TODO: Add lazy loading.
     private async Task OnSearching()
     {
-        _books.Clear();
+        Models.Clear();
 
         var books = _bookService.SearchBooks(Pattern);
 
@@ -63,14 +56,14 @@ public sealed class ListedBooksController : Controller
                 Cover = image
             };
 
-            var controller = new BookOperationsController(model, _navigator, _bookService);
+            var controller = new BookOperationsController(Navigator, _bookService, model);
 
-            _books.Add(controller);
+            Models.Add(controller);
         }
     }
 
     private void OnCreate()
     {
-        _navigator.NavigatePage<CreateBookPage>();
+        Navigator.NavigatePage<CreateBookPage>();
     }
 }

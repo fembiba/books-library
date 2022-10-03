@@ -6,8 +6,7 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <ImplicitUsings>enable</ImplicitUsings>
-        <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
-        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+        <EnableWindowsTargeting>true</EnableWindowsTargeting>
     </PropertyGroup>
 
     <ItemGroup>

@@ -7,19 +7,23 @@ using FluentValidation;
 
 namespace Fembina.BooksLibrary.App.Controllers;
 
-public sealed class BookEditFormController : BookFormController
+public sealed class EditBookFormController : BookFormController
 {
-    public BookEditFormController(BookModel form, INavigator navigator, IBookService bookService) : base(navigator, bookService)
+    private readonly IBookService _bookService;
+    
+    public EditBookFormController(INavigator navigator, IBookService bookService,
+        BookModel book) : base(navigator)
     {
-        Form = form;
+        _bookService = bookService;
+        Model = book;
     }
     
     protected override async Task OnSave()
     {
         try
         {
-            await BookService.ChangeBookInformation((int)Form.Identifier!, Form.Title, Form.Description, 
-                Form.PublishYear, Form.AuthorFirstName, Form.AuthorLastName, Form.IsbnCode, Path);
+            await _bookService.ChangeBookInformation((int)Book.Identifier!, Book.Title, Book.Description, 
+                Book.PublishYear, Book.AuthorFirstName, Book.AuthorLastName, Book.IsbnCode, Path);
 
             Navigator.ForceNavigatePage<BooksLibraryPage>();
         }

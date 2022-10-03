@@ -10,7 +10,7 @@ public partial class EditBookPage : Page
         InitializeComponent();
     }
 
-    public void SetController(BookEditFormController controller)
+    public void SetController(EditBookFormController controller)
     {
         DataContext = controller;
     }

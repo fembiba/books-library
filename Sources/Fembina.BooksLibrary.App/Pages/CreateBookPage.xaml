@@ -14,12 +14,12 @@
     <Grid>
         <controls:EditableBookCard Width="500" Height="350" Margin="15"
                                    Identifier="-1"
-                                   Title="{Binding Path=Form.Title, Mode=TwoWay}"
-                                   Description="{Binding Path=Form.Description, Mode=TwoWay}"
-                                   AuthorFirstName="{Binding Path=Form.AuthorFirstName, Mode=TwoWay}"
-                                   AuthorLastName="{Binding Path=Form.AuthorLastName, Mode=TwoWay}"
-                                   Isbn="{Binding Path=Form.IsbnCode, Mode=TwoWay}"
-                                   Year="{Binding Path=Form.PublishYear, Mode=TwoWay}">
+                                   Title="{Binding Path=Book.Title, Mode=TwoWay}"
+                                   Description="{Binding Path=Book.Description, Mode=TwoWay}"
+                                   AuthorFirstName="{Binding Path=Book.AuthorFirstName, Mode=TwoWay}"
+                                   AuthorLastName="{Binding Path=Book.AuthorLastName, Mode=TwoWay}"
+                                   Isbn="{Binding Path=Book.IsbnCode, Mode=TwoWay}"
+                                   Year="{Binding Path=Book.PublishYear, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="BackClick">
                     <prism:InvokeCommandAction Command="{Binding Path=Cancel}" />
