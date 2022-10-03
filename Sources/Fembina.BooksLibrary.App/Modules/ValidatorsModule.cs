@@ -14,11 +14,13 @@ public sealed class ValidatorsModule : Module
         container.SetTarget<BookEntityValidator>()
             .AsSelf()
             .As<IValidator<BookEntity>>()
+            .With(static _ => new())
             .ToSingleton();
 
         container.SetTarget<FileFormatValidator>()
             .AsSelf()
             .As<IValidator<string>>()
+            .With(static _ => new())
             .ToSingleton();
     }
 }

@@ -10,6 +10,8 @@ using Prism.Ioc;
 
 namespace Fembina.BooksLibrary.App;
 
+using Utils;
+
 public partial class App : Application
 {
     private readonly IContainer _container;
@@ -26,12 +28,14 @@ public partial class App : Application
     {
         var container = new Container();
         container.WithStrategies();
-        container.WithModules(); // Build project to gen this method
-        container.WithProviders(); // Build project to gen this method
 
-        container.AddModule<AppModule>().ToModule();
+        container.AddModule<AppModule>()
+            .With(() => new())
+            .ToModule();
 
-        container.SetTarget<AppWindow>().ToSingleton();
+        container.SetTarget<AppWindow>()
+            .With(static c => new(c.FirstInstance<INavigator>()))
+            .ToSingleton();
 
         return container;
     }

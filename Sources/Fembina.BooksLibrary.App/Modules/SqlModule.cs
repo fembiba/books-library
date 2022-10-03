@@ -18,6 +18,7 @@ public sealed class SqlModule : Module
         container.SetTarget<BooksTableMigration>()
             .AsSelf()
             .As<IMigration>()
+            .With(static _ => new())
             .ToSingleton();
 
         container.SetTarget<SqliteConnection>()
