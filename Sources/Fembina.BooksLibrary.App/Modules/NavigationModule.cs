@@ -12,7 +12,7 @@ public sealed class NavigationModule : Module
     {
         container.SetTarget<Navigator>()
             .As<INavigator>()
-            .With(_ => new Navigator(container))
+            .With(c => new Navigator(c))
             .ToSingleton();
     }
 }
