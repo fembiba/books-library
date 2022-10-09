@@ -5,20 +5,12 @@ using Fembina.BooksLibrary.App.Pages;
 
 namespace Fembina.BooksLibrary.App.Modules;
 
-using Controllers;
-
 public sealed class PagesModule : Module
 {
     public override void Load(IContainer container)
     {
-        container.SetTarget<BooksLibraryPage>()
-            .With(static c => new(c.FirstInstance<ListedBooksController>()))
-            .ToTransient();
-        container.SetTarget<CreateBookPage>()
-            .With(static c => new(c.FirstInstance<CreateBookFormController>()))
-            .ToTransient();
-        container.SetTarget<EditBookPage>()
-            .With(static c => new())
-            .ToTransient();
+        container.SetTarget<BooksLibraryPage>().ToTransient();
+        container.SetTarget<CreateBookPage>().ToTransient();
+        container.SetTarget<EditBookPage>().ToTransient();
     }
 }
